@@ -1041,3 +1041,10 @@ CREATE TABLE IF NOT EXISTS `otp_verifications` (`otp_id` bigint unsigned NOT NUL
 INSERT IGNORE INTO `payment_methods` (`payment_method_id`,`method_name`,`description`,`is_active`) VALUES
 (1,'GCash','Electronic wallet payment',1),(2,'Bank transfer','Municipal bank transfer',1),(3,'Over the counter','Treasury counter payment',1);
 
+-- Pre-registered personal franchisee account requested for development access.
+INSERT IGNORE INTO `users` (`id`,`office_id`,`role_id`,`name`,`username`,`mobile_number`,`password`,`account_status`) VALUES
+(999,NULL,3,'Sean Ivan Ramiscal',NULL,'09153103018',SHA2('FR-2024-00128',256),'active');
+INSERT IGNORE INTO `franchisees` (`franchisee_id`,`user_id`,`first_name`,`middle_name`,`last_name`,`address`,`contact_number`) VALUES
+(999,999,'Sean','Ivan','Ramiscal','To be completed','09153103018');
+INSERT IGNORE INTO `franchises` (`franchise_id`,`franchisee_id`,`franchise_number`,`franchise_status`) VALUES
+(999,999,'FR-2024-00128','active');
