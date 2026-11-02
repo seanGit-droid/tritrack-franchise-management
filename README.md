@@ -38,3 +38,7 @@ DB_PASSWORD=your_mariadb_password
 ```
 
 Import `database/tritrack_db_prc.sql`. The seed accounts are stored as SHA-256 hashes: `seanivan / ramiscal` for Staff/Admin and `czyen / aceveda` for Treasury. When `SMS_PROVIDER` is unset, OTP generation is explicitly shown as development mode and returns the generated code to the UI; configure an SMS provider before production. Real GCash processing also requires a provider account and webhook credentials.
+
+## PHP + MariaDB runtime
+
+The database API is also available as PHP `mysqli` endpoints (`api.php` + `database.php`). For Render, create/update the service as a Docker web service using `Dockerfile`, then set `DATABASE_URL` (or `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`). Navicat can import the SQL schema into the same MariaDB service.
