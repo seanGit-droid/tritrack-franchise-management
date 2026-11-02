@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
 import mysql from 'mysql2/promise';
 const root=fileURLToPath(new URL('.',import.meta.url)); const port=process.env.PORT||3000; const sessions=new Map(); const pendingOtps=new Map();
-const pool=mysql.createPool({host:process.env.DB_HOST||'127.0.0.1',port:Number(process.env.DB_PORT||3306),user:process.env.DB_USER||'root',password:process.env.DB_PASSWORD||'',database:process.env.DB_NAME||'tritrack_db_prc',connectionLimit:5});
+const dbConfig=process.env.DATABASE_URL?process.env.DATABASE_URL:{host:process.env.DB_HOST||'127.0.0.1',port:Number(process.env.DB_PORT||3306),user:process.env.DB_USER||'root',password:process.env.DB_PASSWORD||'',database:process.env.DB_NAME||'tritrack_db_prc',connectionLimit:5}; const pool=mysql.createPool(dbConfig);
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.json':'application/json','.sql':'text/plain; charset=utf-8'};
 const send=(res,status,data)=>{res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data));}; const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 async function body(req){let d='';for await(const c of req)d+=c;try{return JSON.parse(d||'{}')}catch{return {}}} function token(){return crypto.randomBytes(24).toString('hex')} function cookie(req){return (req.headers.cookie||'').match(/tritrack_session=([^;]+)/)?.[1]}
