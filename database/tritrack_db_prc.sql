@@ -1040,3 +1040,4 @@ INSERT IGNORE INTO `users` (`id`,`office_id`,`role_id`,`name`,`username`,`mobile
 CREATE TABLE IF NOT EXISTS `otp_verifications` (`otp_id` bigint unsigned NOT NULL AUTO_INCREMENT,`mobile_number` varchar(20) NOT NULL,`otp_hash` varchar(64) NOT NULL,`expires_at` datetime NOT NULL,`verified_at` datetime DEFAULT NULL,PRIMARY KEY (`otp_id`),KEY `idx_otp_mobile` (`mobile_number`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 INSERT IGNORE INTO `payment_methods` (`payment_method_id`,`method_name`,`description`,`is_active`) VALUES
 (1,'GCash','Electronic wallet payment',1),(2,'Bank transfer','Municipal bank transfer',1),(3,'Over the counter','Treasury counter payment',1);
+
