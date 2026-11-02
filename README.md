@@ -21,3 +21,17 @@ The payment modal is intentionally simulation-only. It records a demo confirmati
 ## Use case diagram
 
 `docs/use-case.svg` is derived from the supplied `Blank-board.pdf` workflow board and is available from the Reports view.
+
+## MariaDB configuration
+
+Set these environment variables for the Node service before starting:
+
+```text
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=tritrack_db_prc
+DB_USER=root
+DB_PASSWORD=your_mariadb_password
+```
+
+Import `database/tritrack_db_prc.sql`. The seed accounts are stored as SHA-256 hashes: `seanivan / ramiscal` for Staff/Admin and `czyen / aceveda` for Treasury. When `SMS_PROVIDER` is unset, OTP generation is explicitly shown as development mode and returns the generated code to the UI; configure an SMS provider before production. Real GCash processing also requires a provider account and webhook credentials.
