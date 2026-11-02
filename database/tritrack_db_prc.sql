@@ -1025,3 +1025,18 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- TriTrack starter accounts for local development.
+INSERT IGNORE INTO `offices` (`office_id`,`office_code`,`office_name`,`description`,`is_active`) VALUES
+(1,'BPLO','Business Permits and Licensing Office','TriTrack BPLO office',1),
+(2,'TREASURY','Municipal Treasury','TriTrack treasury office',1);
+INSERT IGNORE INTO `roles` (`role_id`,`role_name`,`description`) VALUES
+(1,'staff_admin','BPLO staff or administrator'),
+(2,'treasury','Treasury staff'),
+(3,'franchisee','Franchise owner');
+INSERT IGNORE INTO `users` (`id`,`office_id`,`role_id`,`name`,`username`,`mobile_number`,`password`,`account_status`) VALUES
+(1,1,1,'Sean Ivan Ramiscal','seanivan',NULL,SHA2('ramiscal',256),'active'),
+(2,2,2,'Czyen Aceveda','czyen',NULL,SHA2('aceveda',256),'active');
+CREATE TABLE IF NOT EXISTS `otp_verifications` (`otp_id` bigint unsigned NOT NULL AUTO_INCREMENT,`mobile_number` varchar(20) NOT NULL,`otp_hash` varchar(64) NOT NULL,`expires_at` datetime NOT NULL,`verified_at` datetime DEFAULT NULL,PRIMARY KEY (`otp_id`),KEY `idx_otp_mobile` (`mobile_number`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT IGNORE INTO `payment_methods` (`payment_method_id`,`method_name`,`description`,`is_active`) VALUES
+(1,'GCash','Electronic wallet payment',1),(2,'Bank transfer','Municipal bank transfer',1),(3,'Over the counter','Treasury counter payment',1);

@@ -11,7 +11,23 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app-shell">
+
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-brand"><span class="brand-mark">T</span><span>Tri<span>Track</span></span></div>
+    <div class="auth-card">
+      <div class="auth-copy"><p class="eyebrow">Municipal transport services</p><h1 id="authTitle">Welcome back</h1><p id="authSubtitle">Choose your workspace to continue.</p></div>
+      <div class="role-tabs"><button class="role-tab active" data-role="franchisee">Franchisee</button><button class="role-tab" data-role="staff">Staff / Admin</button><button class="role-tab" data-role="treasury">Treasury</button></div>
+      <form id="loginForm" class="auth-form">
+        <div id="signupFields" class="signup-fields"><label>Full name<input id="fullName" placeholder="Juan Dela Cruz" autocomplete="name"></label><label>Franchise number<input id="franchiseNumber" placeholder="FR-2024-00128"></label><label>Mobile number<input id="mobileNumber" placeholder="0917 555 0128" inputmode="tel"></label></div>
+        <div id="staffFields" class="staff-fields hidden"><label>Username<input id="username" placeholder="Username" autocomplete="username"></label><label>Password<input id="password" type="password" placeholder="Password" autocomplete="current-password"></label></div>
+        <div id="otpFields" class="otp-fields hidden"><label>OTP code<input id="otpCode" inputmode="numeric" maxlength="6" placeholder="Enter the 6-digit OTP"></label><p class="form-hint">For this local workflow, use the OTP shown after requesting it.</p></div>
+        <button class="primary-btn auth-submit" type="submit" id="authSubmit">Request OTP</button>
+        <p class="auth-error" id="authError" role="alert"></p>
+      </form>
+      <p class="credential-hint" id="credentialHint">Franchisee signup sends an OTP to the registered mobile number.</p>
+    </div>
+  </section>
+  <div class="app-shell" id="appShell">
     <aside class="sidebar" id="sidebar">
       <div class="brand brand-light"><span class="brand-mark">T</span><span>Tri<span>Track</span></span></div>
       <div class="role-label">STAFF / ADMIN · BPLO</div>
@@ -28,7 +44,7 @@
     <main class="main-area">
       <header class="topbar"><button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button><div class="brand brand-dark"><span class="brand-mark">T</span><span>Tri<span>Track</span></span></div><div class="top-user"><span class="office-pill">BPLO office</span><span>·</span><span>M. Reyes</span><button class="link-btn" id="logoutBtn">Logout</button></div></header>
       <div class="content-wrap">
-        <section id="view-dashboard" class="view active-view">
+        <section id="view-franchisee" class="view"></section><section id="view-treasury" class="view"></section><section id="view-dashboard" class="view active-view">
           <div class="page-heading"><div><p class="eyebrow">BPLO office · Municipal transport services</p><h1>BPLO Dashboard</h1><p class="subheading">Stay on top of applications, renewals, and treasury hand-offs.</p></div><button class="outline-btn" data-view="renewal">View all records <span>→</span></button></div>
           <div class="metric-grid">
             <article class="metric-card accent"><span>Renewals pending or revoke</span><strong data-count="12">12</strong><small>Needs attention this week</small></article>
@@ -51,7 +67,7 @@
     </main>
   </div>
   <div class="toast" id="toast" role="status"></div>
-  <dialog class="modal" id="paymentModal"><form method="dialog" class="modal-card" id="paymentForm"><button class="modal-close" value="cancel" aria-label="Close">×</button><div class="modal-kicker">Simulation payment</div><h2>Record a demo payment</h2><p>This flow is intentionally simulated until a payment provider is selected.</p><label>Assessment number<input value="AS-2026-00128" readonly /></label><label>Amount due<input id="paymentAmount" type="number" value="1250" min="1" /></label><label>Method<select><option>Demo GCash</option><option>Demo bank transfer</option><option>Demo over-the-counter</option></select></label><button class="primary-btn" value="default" id="confirmPayment">Confirm simulated payment</button></form></dialog>
+  <dialog class="modal" id="paymentModal"><form method="dialog" class="modal-card" id="paymentForm"><button class="modal-close" value="cancel" aria-label="Close">×</button><div class="modal-kicker">Payment verification</div><h2>Record payment</h2><p>Review the assessment details and submit the payment record for treasury verification.</p><label>Assessment number<input value="AS-2026-00128" readonly /></label><label>Amount due<input id="paymentAmount" type="number" value="1250" min="1" /></label><label>Method<select><option>Demo GCash</option><option>Demo bank transfer</option><option>Demo over-the-counter</option></select></label><button class="primary-btn" value="default" id="confirmPayment">Submit payment record</button></form></dialog>
   <script src="app.js"></script>
 </body>
 </html>
